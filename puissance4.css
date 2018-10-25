@@ -1,0 +1,106 @@
+*{
+    margin:0;
+    padding:0;
+}
+html{
+    width:100%;
+    height:100%;
+}
+h1{
+    font-family: 'Bungee Shade';
+    color: #082746ff;
+    text-align: center;
+}
+h2{
+    font-family: 'Bungee Inline';
+    text-align:center;
+    color: #082746ff;
+    font-weight:normal;
+}
+
+/* Hiding p2 by default, to change players after */ 
+#player1{
+    display:block;
+    height:1.5em;
+    width:40%;
+    margin: auto;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    color:#e10c00ff;
+    border: 2px dotted #082746ff;
+    text-align:center;
+    font-family:'Bungee';
+}
+
+#player2{
+    display:none;
+    height:1.5em;
+    width:40%;
+    margin: auto;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    color:#ffb000ff;
+    border: 2px dotted #082746ff;
+    text-align:center;
+    font-family:'Bungee';
+}
+
+/* Apply sizes to container */ 
+
+#container{
+    height:80%;
+    width:100%;
+}
+/* Styling grid*/ 
+
+
+table{
+    display:table;
+    /* Apply margins to center the grid */
+    margin-left: auto;
+    margin-right: auto;
+    /* Define width/height of the grid*/ 
+    width:350px;
+    height:350px;
+    background-color:#082746ff;
+    border-color:white;
+    border-spacing: 2px;
+}
+
+.row{
+    height:14.28%;
+    width:100%;
+}
+
+/* Styling cell to make them look like circles */ 
+
+.cell{
+    display:table-cell;
+    height:1em;
+    width:1em;
+    background-color:white;
+    border-radius: 50%;
+}
+
+
+footer{
+    display:flex;
+    justify-content: space-around;
+}
+
+#newGame{
+    padding:1em;
+    font-family: 'Bungee Inline';
+    color:#082746ff;
+    font-size:20px;
+    background-color:transparent;
+    border:2px solid #082746ff;
+    margin-top: 1em;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#newGame:active{
+    background-color:#082746ff;
+    color:white;
+}
