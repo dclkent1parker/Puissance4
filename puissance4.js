@@ -60,6 +60,11 @@ var grid2=[
 //             cell[nbcell].style.backgroundColor="yellow";
 //         })
 //     }}
+var resetButton = document.getElementById("newGame");
+resetButton.addEventListener("click",
+    function resetGame(){
+        location.reload();
+});
 
 
 var player1;
