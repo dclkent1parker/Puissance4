@@ -15,14 +15,59 @@ h2{
     font-family: 'Bungee Inline';
     text-align:center;
     color: #082746ff;
-    font-weight:normal;
+    font-weight:lighter;
 }
+
+/*Hiding modal by default*/ 
+
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+#modalContent {
+    display:flex;
+    justify-content: space-around;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+
+    
+}
+#modalContent h2{
+    margin-top:auto;
+    margin-bottom:auto;
+}
+#newGame{
+    padding:1em;
+    font-family: 'Bungee Inline';
+    color:#082746ff;
+    font-size:20px;
+    background-color:transparent;
+    border:2px solid #082746ff;
+    
+}
+
+#newGame:active{
+    background-color:#082746ff;
+    color:white;
+}
+
 
 /* Hiding p2 by default, to change players after */ 
 #player1{
     display:block;
     height:1.5em;
-    width:40%;
+    width:10em;
     margin: auto;
     margin-bottom: 1em;
     margin-top: 1em;
@@ -35,7 +80,7 @@ h2{
 #player2{
     display:none;
     height:1.5em;
-    width:40%;
+    width:10em;
     margin: auto;
     margin-bottom: 1em;
     margin-top: 1em;
@@ -82,25 +127,21 @@ table{
     border-radius: 50%;
 }
 
+@media screen and (min-width: 992px){
+    h1{
+        font-size:3em;
+    }
+    #containerTurn h2{
+        font-size:2em;
+    }
 
-footer{
-    display:flex;
-    justify-content: space-around;
+    #modalContent{
+        width:30%;
+    }
+
+    table{
+        width:500px;
+        height:500px;
+    }
 }
 
-#newGame{
-    padding:1em;
-    font-family: 'Bungee Inline';
-    color:#082746ff;
-    font-size:20px;
-    background-color:transparent;
-    border:2px solid #082746ff;
-    margin-top: 1em;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-#newGame:active{
-    background-color:#082746ff;
-    color:white;
-}

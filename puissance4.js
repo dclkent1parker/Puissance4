@@ -24,43 +24,6 @@ var grid2=[
     [0, 0, 0, 0, 0, 0, 0]
 ];
 
-
-// /* Fonction pour obtenir une colonne */ 
-// function getCol(grid, col){
-//     var column = [];
-//     for(var i=0; i<grid.length; i++){
-//        column.push(grid[i][col]);
-//     }
-//     return column;
-//  }
-
-// /* variables contenant chacunes une colonne définie */ 
-//  var col0 = getCol(grid, 0);
-//  var col1 = getCol(grid, 1);
-//  var col2 = getCol(grid, 2);
-//  var col3 = getCol(grid, 3);
-//  var col4 = getCol(grid, 4);
-//  var col5 = getCol(grid, 5);
-//  var col6 = getCol(grid, 6);
-
-
-// /* Add Event Listener sur une colonne */ 
-
-// function columnP1(col,nbcell){
-// for(var i = 0; i < col.length ; i++){
-//     col[i].addEventListener('click', 
-//     function(){
-//         cell[nbcell].style.backgroundColor="red";
-//     })
-// }}
-// function columnP2(col,nbcell){
-//     for(var i = 0; i < col.length ; i++){
-//         col[i].addEventListener('click', 
-//         function(){
-//             cell[nbcell].style.backgroundColor="yellow";
-//         })
-//     }}
-
 var resetButton = document.getElementById("newGame");
 resetButton.addEventListener("click",
     function resetGame(){
@@ -74,20 +37,34 @@ var player=player1;
 var yourTurnP1= document.getElementById("player1");
 var yourTurnP2= document.getElementById("player2");
 
+function victory(){
+    var modal = document.getElementById("modal");
+    var modalcontent = document.getElementById("modalContent");
+    var textModal= document.getElementById("textModal");
+
+    modal.style.display="block";
+    textModal.innerHTML="Player "+player+" wins";
+}
+
+
 function compare(){
     for(var y=0 ; y <= 6 ; y++){
         var consecutive=0; 
         for(var x=0; x <=6 ; x++){
+            /*check if consecutives in columns */
             if(grid2[y][x] == player){
                 consecutive++;
                 if(consecutive == 4){
                     console.log("Player "+player+" wins");
+                    victory();
                     break;
                 }}
+            /* check if consecutives in rows*/
             else if(grid2[x][y] == player){
                 consecutive++;
                 if(consecutive == 4){
                     console.log("Player "+player+" wins");
+                    victory();
                     break;
                 }}
             else{
@@ -97,6 +74,29 @@ function compare(){
     }
 }
 
+function compareDiagonal1(){
+    for(var y=0 ; y <=3 ; y++){
+        for(var x=0; x <=3 ; x++){
+            if(grid2[y][x]==player && grid2[y+1][x+1]==player && grid2[y+2][x+2]==player && grid2[y+3][x+3]==player){
+                console.log("Player "+player+" wins");
+                victory();
+                break;
+            }
+        }
+    }
+}
+
+function compareDiagonal2(){
+    for(var y=0 ; y <= 3 ; y++){
+        for(var x=6; x >=3 ; x--){
+            if(grid2[y][x]==player && grid2[y+1][x-1]==player && grid2[y+2][x-2]==player && grid2[y+3][x-3]==player){
+                console.log("Player "+player+" wins");
+                victory();
+                break;
+            }
+        }
+    }
+}
 
 function check(col){
     if(player==player1){
@@ -107,7 +107,10 @@ function check(col){
                 if(grid2[col][i]==0){
                     grid[i][col].style.backgroundColor="#e10c00ff";
                     grid2[col][i]=1;
+                    compareDiagonal1();
+                    compareDiagonal2();
                     compare();
+                    
                     player=player2;
                     break;
                 }
@@ -124,7 +127,10 @@ function check(col){
                 if(grid2[col][i]==0){
                     grid[i][col].style.backgroundColor="#ffb000ff";
                     grid2[col][i]=2;
+                    compareDiagonal1();
+                    compareDiagonal2();
                     compare();
+                    
                     player=player1;      
                     break;
                 }
