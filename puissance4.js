@@ -78,19 +78,26 @@ function compare(){
     for(var y=0 ; y <= 6 ; y++){
         var consecutive=0; 
         for(var x=0; x <=6 ; x++){
-            if(grid2[y][x] == 1){
+            if(grid2[y][x] == player){
                 consecutive++;
-                console.log(consecutive)
-                if(consecutive==4){
-                    console.log("Player 1 wins");
+                if(consecutive == 4){
+                    console.log("Player "+player+" wins");
                     break;
                 }}
-                
+            else if(grid2[x][y] == player){
+                consecutive++;
+                if(consecutive == 4){
+                    console.log("Player "+player+" wins");
+                    break;
+                }}
+            else{
+                consecutive=0;
+            }     
         }
     }
 }
 
-compare();
+
 function check(col){
     if(player==player1){
         yourTurnP2.style.display="block";
@@ -100,8 +107,8 @@ function check(col){
                 if(grid2[col][i]==0){
                     grid[i][col].style.backgroundColor="#e10c00ff";
                     grid2[col][i]=1;
-                    player=player2;
                     compare();
+                    player=player2;
                     break;
                 }
             }
@@ -117,8 +124,8 @@ function check(col){
                 if(grid2[col][i]==0){
                     grid[i][col].style.backgroundColor="#ffb000ff";
                     grid2[col][i]=2;
-                    player=player1;
                     compare();
+                    player=player1;      
                     break;
                 }
             }
