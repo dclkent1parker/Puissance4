@@ -74,6 +74,23 @@ var player=player1;
 var yourTurnP1= document.getElementById("player1");
 var yourTurnP2= document.getElementById("player2");
 
+function compare(){
+    for(var y=0 ; y <= 6 ; y++){
+        var consecutive=0; 
+        for(var x=0; x <=6 ; x++){
+            if(grid2[y][x] == 1){
+                consecutive++;
+                console.log(consecutive)
+                if(consecutive==4){
+                    console.log("Player 1 wins");
+                    break;
+                }}
+                
+        }
+    }
+}
+
+compare();
 function check(col){
     if(player==player1){
         yourTurnP2.style.display="block";
@@ -84,6 +101,7 @@ function check(col){
                     grid[i][col].style.backgroundColor="#e10c00ff";
                     grid2[col][i]=1;
                     player=player2;
+                    compare();
                     break;
                 }
             }
@@ -100,6 +118,7 @@ function check(col){
                     grid[i][col].style.backgroundColor="#ffb000ff";
                     grid2[col][i]=2;
                     player=player1;
+                    compare();
                     break;
                 }
             }
