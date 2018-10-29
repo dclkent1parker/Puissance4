@@ -56,11 +56,18 @@ function wrongColumn(){
     )
     
 }
+function draw(){
+    modal.style.display="block";
+    textModal.innerHTML="Draw!"; 
+    
+}
+
 
 
 function compare(){
     for(y=0 ; y <= 6 ; y++){
-        consecutive=0; 
+        var consecutive=0; 
+        var consecutive2=0;
         for(x=0; x <=6 ; x++){
             /*check if consecutives in columns */
             if(grid2[y][x] == player){
@@ -72,14 +79,15 @@ function compare(){
                 }}
             /* check if consecutives in rows*/
             else if(grid2[x][y] == player){
-                consecutive++;
-                if(consecutive == 4){
+                consecutive2++;
+                if(consecutive2 == 4){
                     console.log("Player "+player+" wins");
                     victory();
                     break;
                 }}
             else{
                 consecutive=0;
+                consecutive2=0;
             }     
         }
     }
