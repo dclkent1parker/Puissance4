@@ -60,6 +60,7 @@ var grid2=[
 //             cell[nbcell].style.backgroundColor="yellow";
 //         })
 //     }}
+
 var resetButton = document.getElementById("newGame");
 resetButton.addEventListener("click",
     function resetGame(){
@@ -67,24 +68,44 @@ resetButton.addEventListener("click",
 });
 
 
-var player1;
-var player2;
+var player1=1;
+var player2=2;
+var player=player1;
+var yourTurnP1= document.getElementById("player1");
+var yourTurnP2= document.getElementById("player2");
 
 function check(col){
-    if(grid2[col][0]==0){
-        for(i=6 ; i>=0 ; i--){
-            if(grid2[col][i]==1){
-                
-            }
-            else if(grid2[col][i]==0){
-                grid[i][col].style.backgroundColor="red";
-                grid2[col][i]=1;
-                break;
+    if(player==player1){
+        yourTurnP2.style.display="block";
+        yourTurnP1.style.display="none";
+        if(grid2[col][0]==0){
+            for(i=6 ; i>=0 ; i--){
+                if(grid2[col][i]==0){
+                    grid[i][col].style.backgroundColor="#e10c00ff";
+                    grid2[col][i]=1;
+                    player=player2;
+                    break;
+                }
             }
         }
+        else{
+            console.log("Choisi une autre colonne");
+        }
+    }else{
+        yourTurnP1.style.display="block";
+        yourTurnP2.style.display="none";
+        if(grid2[col][0]==0){
+            for(i=6 ; i>=0 ; i--){
+                if(grid2[col][i]==0){
+                    grid[i][col].style.backgroundColor="#ffb000ff";
+                    grid2[col][i]=2;
+                    player=player1;
+                    break;
+                }
+            }
+        }
+        else{
+            console.log("Choisi une autre colonne");
+        }}
     }
-    else{
-        console.log("Choisi une autre colonne");
-    }
-}
 
