@@ -39,6 +39,7 @@ var yourTurnP2= document.getElementById("player2");
 var modal = document.getElementById("modal");
 var modalcontent = document.getElementById("modalContent");
 var textModal= document.getElementById("textModal");
+var turns = 0;
 
 function victory(){
     modal.style.display="block";
@@ -57,9 +58,9 @@ function wrongColumn(){
     
 }
 function draw(){
+    if(turns == 49){
     modal.style.display="block";
-    textModal.innerHTML="Draw!"; 
-    
+    textModal.innerHTML="Draw!";}
 }
 
 
@@ -129,6 +130,8 @@ function check(col){
                     compareDiagonal1();
                     compareDiagonal2();
                     compare();
+                    turns++;
+                    draw();
                     
                     player=player2;
                     break;
@@ -149,6 +152,8 @@ function check(col){
                     compareDiagonal1();
                     compareDiagonal2();
                     compare();
+                    turns++;
+                    draw();
                     
                     player=player1;      
                     break;
