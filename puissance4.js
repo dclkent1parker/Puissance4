@@ -40,9 +40,12 @@ var modal = document.getElementById("modal");
 var modalcontent = document.getElementById("modalContent");
 var textModal= document.getElementById("textModal");
 var turns = 0;
+var nbRow;
+var nbCol;
 
 function victory(){
     modal.style.display="block";
+    resetButton.style.display="block";
     textModal.innerHTML="Player "+player+" wins";
 }
 
@@ -60,36 +63,41 @@ function wrongColumn(){
 function draw(){
     if(turns == 49){
     modal.style.display="block";
+    resetButton.style.display="block";
     textModal.innerHTML="Draw!";}
 }
 
-
-
-function compare(){
-    for(y=0 ; y <= 6 ; y++){
-        var consecutive=0; 
-        var consecutive2=0;
-        for(x=0; x <=6 ; x++){
-            /*check if consecutives in columns */
-            if(grid2[y][x] == player){
+function compareRows(){
+    for(y=6 ; y >=0 ; y--){
+        var consecutive=0;
+        for(x=6; x >=0 ; x--){
+            if(grid2[x][y] == player){
                 consecutive++;
-                if(consecutive == 4){
-                    console.log("Player "+player+" wins");
-                    victory();
-                    break;
-                }}
-            /* check if consecutives in rows*/
-            else if(grid2[x][y] == player){
-                consecutive2++;
-                if(consecutive2 == 4){
-                    console.log("Player "+player+" wins");
-                    victory();
-                    break;
-                }}
+                    if(consecutive==4){
+                        victory();
+                        break;
+                    }
+            }
             else{
                 consecutive=0;
-                consecutive2=0;
-            }     
+            }
+        }
+    }
+}
+function compareCols(){
+    for(y=0 ; y <= 6 ; y++){
+        var consecutive=0;
+        for(x=0; x <=6 ; x++){
+            if(grid2[y][x] == player){
+                consecutive++;
+                    if(consecutive==4){
+                        victory();
+                        break;
+                    }
+            }
+            else{
+                consecutive=0;
+            }
         }
     }
 }
@@ -123,16 +131,18 @@ function check(col){
         if(grid2[col][0]==0){
             for(i=6 ; i>=0 ; i--){
                 if(grid2[col][i]==0){
+                    grid[i][col].style.transition="500ms";
                     grid[i][col].style.backgroundColor="#e10c00ff";
                     grid2[col][i]=1;
                     yourTurnP2.style.display="block";
                     yourTurnP1.style.display="none";
                     compareDiagonal1();
                     compareDiagonal2();
-                    compare();
+                    compareRows();
+                    compareCols();
+
                     turns++;
                     draw();
-                    
                     player=player2;
                     break;
                 }
@@ -145,16 +155,17 @@ function check(col){
         if(grid2[col][0]==0){
             for(i=6 ; i>=0 ; i--){
                 if(grid2[col][i]==0){
+                    grid[i][col].style.transition="500ms";
                     grid[i][col].style.backgroundColor="#ffb000ff";
                     grid2[col][i]=2;
                     yourTurnP1.style.display="block";
                     yourTurnP2.style.display="none";
                     compareDiagonal1();
                     compareDiagonal2();
-                    compare();
+                    compareRows();
+                    compareCols();
                     turns++;
                     draw();
-                    
                     player=player1;      
                     break;
                 }
