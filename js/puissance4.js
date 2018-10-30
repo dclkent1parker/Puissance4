@@ -102,6 +102,7 @@ function compareCols(){
     }
 }
 
+
 function compareDiagonal1(){
     for(var y=0 ; y <=3 ; y++){
         for(var x=0; x <=3 ; x++){
