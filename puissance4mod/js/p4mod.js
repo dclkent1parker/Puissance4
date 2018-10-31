@@ -1,61 +1,65 @@
 
 
 /* Ask how many rows and cols the player wants */ 
-var nbRow= parseInt(prompt("Choose the number of rows (4 at least)"));
-if (nbRow<4){
-    nbRow= parseInt(prompt("Please, choose a number after 4"))
+var nbRow= parseInt(prompt("Choose the number of rows and columns (between 4 and 20)"));
+if (nbRow<4 | nbRow>20){
+    nbRow= parseInt(prompt("Please, choose a number of rows and columns between 4 and 20 included"))
 }
-var nbCol= parseInt(prompt("Choose the number of columns (4 at least)"));
-if (nbCol<4){
-    nbRow= parseInt(prompt("Please, choose a number after 4"))
+var nbCol= nbRow;
+
+
+/* create the table depending on the player's choices */
+var table= document.getElementById("table");
+var n=0;
+function createTable(){
+    for(i=0; i<=nbRow-1 ; i++){
+        var row = table.insertRow();
+        row.setAttribute("id", "row"+i)
+        for(y=0 ; y<=nbCol-1 ; y++){
+            var cell = row.insertCell();
+            n++;
+            cell.setAttribute("id", "cell"+n);
+            cell.setAttribute('onclick',"check("+y+")");
+        }
+    }
 }
 
-function createRows(){
-    
+createTable();
 
-}
+/* create 2d array depending on the number of rows and columns */
 
-((var row=document.createElement("table"))*nbRow);
+var grid2=[];
 
-
-
-
-
-
-
-
+for(i=0 ; i <= nbCol-1 ; i++){
+    grid2[i] = new Array ();
+    for(j=0 ; j<= nbRow-1 ; j++){
+        grid2[i].push(0);
+    }
+};
 
 
 
 
+/* create 2d array including the table's cells */ 
+var grid=[];
+var cell= document.getElementsByTagName("td");
+var nbCells= (nbCol-1)*(nbRow-1);
+var n=0; 
+for(i=0 ; i <= nbCol-1 ; i++){
+    grid[i] = new Array ();
+    for(j=0 ; j<= nbRow-1 ; j++){
+        grid[i].push(cell[n]);
+        n++;
+    }
+};
+
+console.log(grid)
+console.log(grid2)
 
 
 
 
 
-
-/* Récupération de notre tableau HTML dans un array 2D */ 
-// var grid=[
-//     [cell[0], cell[1], cell[2], cell[3], cell[4], cell[5], cell[6]],
-//     [cell[7], cell[8], cell[9], cell[10], cell[11], cell[12], cell[13]],
-//     [cell[14], cell[15], cell[16], cell[17], cell[18], cell[19], cell[20]],
-//     [cell[21], cell[22], cell[23], cell[24], cell[25], cell[26], cell[27]],
-//     [cell[28], cell[29], cell[30], cell[31], cell[32], cell[33], cell[34]],
-//     [cell[35], cell[36], cell[37], cell[38], cell[39], cell[40], cell[41]],
-//     [cell[42], cell[43], cell[44], cell[45], cell[46], cell[47], cell[48]]
-// ];
-
-
-
-var grid2=[
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0]
-];
 
 var resetButton = document.getElementById("newGame");
 resetButton.addEventListener("click",
@@ -92,16 +96,16 @@ function wrongColumn(){
     
 }
 function draw(){
-    if(turns == 49){
+    if(turns == nbCells){
     modal.style.display="block";
     resetButton.style.display="block";
     textModal.innerHTML="Draw!";}
 }
 
 function compareRows(){
-    for(y=6 ; y >=0 ; y--){
+    for(y=nbCol-1 ; y >=0 ; y--){
         var consecutive=0;
-        for(x=6; x >=0 ; x--){
+        for(x=nbRow-1; x >=0 ; x--){
             if(grid2[x][y] == player){
                 consecutive++;
                     if(consecutive==4){
@@ -116,9 +120,9 @@ function compareRows(){
     }
 }
 function compareCols(){
-    for(y=0 ; y <= 6 ; y++){
+    for(y=0 ; y <= nbCol-1 ; y++){
         var consecutive=0;
-        for(x=0; x <=6 ; x++){
+        for(x=0; x <=nbRow-1 ; x++){
             if(grid2[y][x] == player){
                 consecutive++;
                     if(consecutive==4){
@@ -135,8 +139,8 @@ function compareCols(){
 
 
 function compareDiagonal1(){
-    for(var y=0 ; y <=3 ; y++){
-        for(var x=0; x <=3 ; x++){
+    for(var y=0 ; y <=nbCol-4 ; y++){
+        for(var x=0; x <=nbRow-4 ; x++){
             if(grid2[y][x]==player && grid2[y+1][x+1]==player && grid2[y+2][x+2]==player && grid2[y+3][x+3]==player){
                 console.log("Player "+player+" wins");
                 victory();
@@ -147,8 +151,8 @@ function compareDiagonal1(){
 }
 
 function compareDiagonal2(){
-    for(y=0 ; y <= 3 ; y++){
-        for(x=6; x >=3 ; x--){
+    for(y=0 ; y <= nbCol-4 ; y++){
+        for(x=nbRow-1; x >=nbRow-4 ; x--){
             if(grid2[y][x]==player && grid2[y+1][x-1]==player && grid2[y+2][x-2]==player && grid2[y+3][x-3]==player){
                 console.log("Player "+player+" wins");
                 victory();
@@ -161,7 +165,7 @@ function compareDiagonal2(){
 function check(col){
     if(player==player1){
         if(grid2[col][0]==0){
-            for(i=6 ; i>=0 ; i--){
+            for(i=nbRow-1 ; i>=0 ; i--){
                 if(grid2[col][i]==0){
                     grid[i][col].style.transition="500ms";
                     grid[i][col].style.backgroundColor="#e10c00ff";
@@ -185,7 +189,7 @@ function check(col){
         }
     }else{
         if(grid2[col][0]==0){
-            for(i=6 ; i>=0 ; i--){
+            for(i=nbRow-1 ; i>=0 ; i--){
                 if(grid2[col][i]==0){
                     grid[i][col].style.transition="500ms";
                     grid[i][col].style.backgroundColor="#ffb000ff";

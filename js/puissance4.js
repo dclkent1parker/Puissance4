@@ -12,6 +12,7 @@ var grid=[
     [cell[42], cell[43], cell[44], cell[45], cell[46], cell[47], cell[48]]
 ];
 
+console.log(grid);
 
 
 var grid2=[

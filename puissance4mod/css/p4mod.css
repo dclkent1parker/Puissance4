@@ -101,6 +101,7 @@ h2{
 
 table{
     display:table;
+    flex-wrap:wrap;
     /* Apply margins to center the grid */
     margin-left: auto;
     margin-right: auto;
@@ -111,7 +112,18 @@ table{
     border-color:white;
     border-spacing: 2px;
 }
-
+tbody{
+    display:table;
+    height:100%;
+    width:100%;
+}
+td{
+    display:table-cell;
+    height:1em;
+    width:1em;
+    background-color:white;
+    border-radius: 50%;
+}
 .row{
     height:14.28%;
     width:100%;
@@ -119,13 +131,7 @@ table{
 
 /* Styling cell to make them look like circles */ 
 
-.cell{
-    display:table-cell;
-    height:1em;
-    width:1em;
-    background-color:white;
-    border-radius: 50%;
-}
+
 
 @media screen and (min-width: 992px){
     h1{
@@ -140,8 +146,8 @@ table{
     }
 
     table{
-        width:500px;
-        height:500px;
+        width:40em;
+        height:40em;
     }
 }
 
