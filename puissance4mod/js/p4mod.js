@@ -19,6 +19,7 @@ function createTable(){
             var cell = row.insertCell();
             n++;
             cell.setAttribute("id", "cell"+n);
+            cell.setAttribute("class", "cells"+y)
             cell.setAttribute('onclick',"check("+y+")");
         }
     }
@@ -43,7 +44,7 @@ for(i=0 ; i <= nbCol-1 ; i++){
 /* create 2d array including the table's cells */ 
 var grid=[];
 var cell= document.getElementsByTagName("td");
-var nbCells= (nbCol-1)*(nbRow-1);
+var nbCells= nbCol*nbRow;
 var n=0; 
 for(i=0 ; i <= nbCol-1 ; i++){
     grid[i] = new Array ();
@@ -172,11 +173,11 @@ function check(col){
                     grid2[col][i]=1;
                     yourTurnP2.style.display="block";
                     yourTurnP1.style.display="none";
+                    table.style.boxShadow="0 0 20px  #ffb000ff, 0 0 20px #ffb000ff";
                     compareDiagonal1();
                     compareDiagonal2();
                     compareRows();
                     compareCols();
-
                     turns++;
                     draw();
                     player=player2;
@@ -196,6 +197,7 @@ function check(col){
                     grid2[col][i]=2;
                     yourTurnP1.style.display="block";
                     yourTurnP2.style.display="none";
+                    table.style.boxShadow="0 0 20px  #e10c00ff, 0 0 20px #e10c00ff"
                     compareDiagonal1();
                     compareDiagonal2();
                     compareRows();

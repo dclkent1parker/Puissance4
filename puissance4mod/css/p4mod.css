@@ -111,6 +111,7 @@ table{
     background-color:#082746ff;
     border-color:white;
     border-spacing: 2px;
+    box-shadow:  0 0 20px  #e10c00ff, 0 0 20px #e10c00ff;
 }
 tbody{
     display:table;
